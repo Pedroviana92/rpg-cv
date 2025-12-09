@@ -38,7 +38,7 @@ export const isAIConfigured = () => {
   console.log('apiActive: ' + apiActive);
   console.log('hasApiKey: ' + hasApiKey);
 
-  return true;
+  return apiActive && hasApiKey;
 };
 
 // Exportar com nomes genéricos para compatibilidade

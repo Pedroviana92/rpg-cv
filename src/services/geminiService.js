@@ -32,9 +32,9 @@ export const askAI = async (question) => {
  * @returns {boolean}
  */
 export const isAIConfigured = () => {
-  console.log('configured')
   const apiActive = import.meta.env.VITE_GEMINI_API_ACTIVE == 'true';
   const hasApiKey = !!import.meta.env.VITE_GEMINI_API_KEY;
+  console.log('apiActive variable: ' + import.meta.env.VITE_GEMINI_API_ACTIVE);
   console.log('apiActive: ' + apiActive);
   console.log('hasApiKey: ' + hasApiKey);
 

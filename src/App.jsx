@@ -10,14 +10,14 @@ function App() {
   const [activeTab, setActiveTab] = useState('quests');
 
   return (
-    <div className="min-h-screen bg-dark-900 p-4 md:p-8">
+    <div className="min-h-screen bg-dark-900 p-3 sm:p-4 md:p-8">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="font-display text-5xl md:text-6xl font-bold mb-4 text-light drop-shadow-lg">
+          <h1 className="font-display text-3xl sm:text-4xl md:text-6xl font-bold mb-4 text-light drop-shadow-lg">
             ⚔️ RPG CURRICULUM VITAE ⚔️
           </h1>
-          <p className="font-mono text-lg text-gray-300">
+          <p className="font-mono text-sm sm:text-base md:text-lg text-gray-300">
             Uma jornada profissional épica
           </p>
         </div>
@@ -40,10 +40,10 @@ function App() {
         <SearchBar />
 
         {/* Navigation Tabs */}
-        <div className="flex gap-3 mb-6 flex-wrap">
+        <div className="flex flex-col sm:flex-row gap-3 mb-6">
           <button
             onClick={() => setActiveTab('quests')}
-            className={`font-display font-bold px-6 py-3 border-3 transition-all ${
+            className={`font-display font-bold px-4 py-3 sm:px-6 border-3 transition-all w-full sm:w-auto text-sm sm:text-base ${
               activeTab === 'quests'
                 ? 'bg-primary text-dark border-primary shadow-brutal translate-x-0 translate-y-0'
                 : 'bg-dark-700 text-light border-primary hover:bg-dark-600 hover:translate-x-1 hover:translate-y-1 shadow-brutal hover:shadow-none'
@@ -53,7 +53,7 @@ function App() {
           </button>
           <button
             onClick={() => setActiveTab('sideQuests')}
-            className={`font-display font-bold px-6 py-3 border-3 transition-all ${
+            className={`font-display font-bold px-4 py-3 sm:px-6 border-3 transition-all w-full sm:w-auto text-sm sm:text-base ${
               activeTab === 'sideQuests'
                 ? 'bg-secondary text-dark border-secondary shadow-brutal-green translate-x-0 translate-y-0'
                 : 'bg-dark-700 text-light border-secondary hover:bg-dark-600 hover:translate-x-1 hover:translate-y-1 shadow-brutal-green hover:shadow-none'
@@ -63,7 +63,7 @@ function App() {
           </button>
           <button
             onClick={() => setActiveTab('skills')}
-            className={`font-display font-bold px-6 py-3 border-3 transition-all ${
+            className={`font-display font-bold px-4 py-3 sm:px-6 border-3 transition-all w-full sm:w-auto text-sm sm:text-base ${
               activeTab === 'skills'
                 ? 'bg-accent text-dark border-accent shadow-brutal-cyan translate-x-0 translate-y-0'
                 : 'bg-dark-700 text-light border-accent hover:bg-dark-600 hover:translate-x-1 hover:translate-y-1 shadow-brutal-cyan hover:shadow-none'
@@ -76,7 +76,7 @@ function App() {
         {/* Content Sections */}
         {activeTab === 'quests' && (
           <div>
-            <h2 className="font-display text-3xl font-bold mb-4 text-light flex items-center gap-2">
+            <h2 className="font-display text-2xl sm:text-3xl font-bold mb-4 text-light flex items-center gap-2">
               ⚔️ Experiências Profissionais
             </h2>
             <p className="font-mono text-sm mb-6 text-gray-300">
@@ -90,7 +90,7 @@ function App() {
 
         {activeTab === 'sideQuests' && (
           <div>
-            <h2 className="font-display text-3xl font-bold mb-4 text-light flex items-center gap-2">
+            <h2 className="font-display text-2xl sm:text-3xl font-bold mb-4 text-light flex items-center gap-2">
               📚 Formação e Certificações
             </h2>
             <p className="font-mono text-sm mb-6 text-gray-300">
@@ -106,13 +106,13 @@ function App() {
 
         {activeTab === 'skills' && (
           <div>
-            <h2 className="font-display text-3xl font-bold mb-6 text-light flex items-center gap-2">
+            <h2 className="font-display text-2xl sm:text-3xl font-bold mb-6 text-light flex items-center gap-2">
               ⚡ Habilidades e Atributos
             </h2>
 
             {/* Technical Skills */}
             <div className="mb-8">
-              <h3 className="font-display text-2xl font-bold mb-4 text-light">
+              <h3 className="font-display text-xl sm:text-2xl font-bold mb-4 text-light">
                 💻 Habilidades Técnicas
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -141,7 +141,7 @@ function App() {
 
             {/* Languages */}
             <div className="mb-8">
-              <h3 className="font-display text-2xl font-bold mb-4 text-light">
+              <h3 className="font-display text-xl sm:text-2xl font-bold mb-4 text-light">
                 🌍 Idiomas
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -160,7 +160,7 @@ function App() {
 
             {/* Soft Skills */}
             <div>
-              <h3 className="font-display text-2xl font-bold mb-4 text-light">
+              <h3 className="font-display text-xl sm:text-2xl font-bold mb-4 text-light">
                 🤝 Soft Skills
               </h3>
               <div className="flex flex-wrap gap-3">

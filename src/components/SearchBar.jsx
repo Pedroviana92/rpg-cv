@@ -3,6 +3,29 @@ import Card from './Card';
 import Button from './Button';
 import { askGemini, isGeminiConfigured } from '../services/geminiService';
 
+// Função auxiliar para transformar URLs em links clicáveis
+const renderTextWithLinks = (text) => {
+  const urlRegex = /(https?:\/\/[^\s]+)/g;
+  const parts = text.split(urlRegex);
+
+  return parts.map((part, index) => {
+    if (part.match(urlRegex)) {
+      return (
+        <a 
+          key={index} 
+          href={part} 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          className="text-primary hover:text-secondary underline" // Estilo para links
+        >
+          {part}
+        </a>
+      );
+    }
+    return part;
+  });
+};
+
 const SearchBar = () => {
   const [question, setQuestion] = useState('');
   const [answer, setAnswer] = useState('');
@@ -116,7 +139,7 @@ const SearchBar = () => {
               🤖 Resposta da IA:
             </h3>
             <p className="font-mono text-sm whitespace-pre-wrap leading-relaxed text-gray-300">
-              {answer}
+              {renderTextWithLinks(answer)}
             </p>
           </div>
         </Card>

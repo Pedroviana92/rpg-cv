@@ -2,6 +2,12 @@ const CACHE_KEY = 'rpg_cv_chat_cache';
 const COUNT_KEY = 'rpg_cv_prompt_count';
 const MAX_PROMPTS_PER_SESSION = 3;
 
+// Mensagem amigável para limites (Sessão ou API 429)
+const LIMIT_MESSAGE = `🛡️ Limite de mana atingido!\n\n` +
+  `Para continuar sua jornada, recarregue a página (se for limite de sessão) ou entre em contato diretamente:\n` +
+  `LinkedIn: https://www.linkedin.com/in/pedro-viana-2b760757/\n` +
+  `WhatsApp: https://wa.me/5532999315341`;
+
 /**
  * Normaliza a pergunta para usar como chave de cache
  */
@@ -65,13 +71,7 @@ export const askAI = async (question) => {
   // 2. Verificar Limite da Sessão
   const currentUsage = getPromptCount();
   if (currentUsage >= MAX_PROMPTS_PER_SESSION) {
-    // Simulamos um erro ou retornamos uma mensagem direta
-    throw new Error(
-      `🛡️ Limite de mana atingido! (${MAX_PROMPTS_PER_SESSION}/3 perguntas por sessão).\n\n` +
-      `Para saber mais detalhes, recarregue a página ou entre em contato:\n` +
-      `LinkedIn: https://www.linkedin.com/in/pedro-viana-2b760757/\n` +
-      `WhatsApp: https://wa.me/5532999315341`
-    );
+    throw new Error(LIMIT_MESSAGE);
   }
 
   try {
@@ -83,6 +83,11 @@ export const askAI = async (question) => {
       body: JSON.stringify({ question: question }),
     });
 
+    // 2.1 Verificar Erro 429 (API Gateway/Vercel)
+    if (response.status === 500) {
+      throw new Error(LIMIT_MESSAGE);
+    }
+
     const data = await response.json();
     console.log(data);
     
@@ -93,8 +98,14 @@ export const askAI = async (question) => {
       return data.answer; 
     }
     
-    // Se a API retornou erro (ex: Overloaded), não incrementamos o contador
+    // 4. Tratar erros da API
     if (data.error) {
+       // Verificar se o erro interno é de cota (Quota Exceeded / 429)
+       const errorStr = typeof data.error === 'string' ? data.error : JSON.stringify(data.error);
+       if (errorStr.includes('429') || errorStr.toLowerCase().includes('quota') || errorStr.toLowerCase().includes('exhausted')) {
+         throw new Error(LIMIT_MESSAGE);
+       }
+
        throw new Error(data.error);
     }
 

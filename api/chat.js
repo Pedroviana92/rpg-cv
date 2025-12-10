@@ -66,9 +66,8 @@ export default async function handler(req, res) {
 
   try {
     // 3. Inicializar o Gemini (A chave vem das Variáveis de Ambiente do Servidor)
-    console.log(process.env.GEMINI_API_KEY);
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-    const model = genAI.getGenerativeModel({ model: "models/gemini-2.5-flash-lite" });
+    const model = genAI.getGenerativeModel({ model: "models/gemma-3n-e2b-it" });
 
     const context = prepareContext();
     

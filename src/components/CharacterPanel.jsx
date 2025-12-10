@@ -13,7 +13,8 @@ const CharacterPanel = ({
   avatar,
   characterClass,
   specialization,
-  stats
+  stats,
+  onStatClick
 }) => {
   return (
     <Card variant="dark-800" shadow="brutal-xl" className="mb-6">
@@ -47,23 +48,35 @@ const CharacterPanel = ({
       />
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
-        <div className="border-3 border-primary bg-dark-600 p-3 sm:p-4 shadow-brutal text-light">
+        <div
+          onClick={() => onStatClick?.('totalXP')}
+          className="border-3 border-primary bg-dark-600 p-3 sm:p-4 shadow-brutal text-light cursor-pointer hover:translate-x-1 hover:translate-y-1 transition-transform hover:shadow-none"
+        >
           <p className="font-display text-xs font-bold mb-1">Total XP</p>
           <p className="font-mono text-lg sm:text-xl font-bold text-primary">{stats.totalXP}</p>
         </div>
-        <div className="border-3 border-secondary bg-dark-600 p-3 sm:p-4 shadow-brutal-green text-light">
+        <div
+          onClick={() => onStatClick?.('mainQuests')}
+          className="border-3 border-secondary bg-dark-600 p-3 sm:p-4 shadow-brutal-green text-light cursor-pointer hover:translate-x-1 hover:translate-y-1 transition-transform hover:shadow-none"
+        >
           <p className="font-display text-xs font-bold mb-1">Main Quests</p>
           <p className="font-mono text-lg sm:text-xl font-bold text-secondary">
             {stats.completedQuests}/{stats.totalQuests}
           </p>
         </div>
-        <div className="border-3 border-accent bg-dark-600 p-3 sm:p-4 shadow-brutal-cyan text-light">
+        <div
+          onClick={() => onStatClick?.('sideQuests')}
+          className="border-3 border-accent bg-dark-600 p-3 sm:p-4 shadow-brutal-cyan text-light cursor-pointer hover:translate-x-1 hover:translate-y-1 transition-transform hover:shadow-none"
+        >
           <p className="font-display text-xs font-bold mb-1">Side Quests</p>
           <p className="font-mono text-lg sm:text-xl font-bold text-accent">
             {stats.completedSideQuests}/{stats.totalSideQuests}
           </p>
         </div>
-        <div className="border-3 border-warning bg-dark-600 p-3 sm:p-4 shadow-brutal text-light">
+        <div
+          onClick={() => onStatClick?.('certifications')}
+          className="border-3 border-warning bg-dark-600 p-3 sm:p-4 shadow-brutal text-light cursor-pointer hover:translate-x-1 hover:translate-y-1 transition-transform hover:shadow-none"
+        >
           <p className="font-display text-xs font-bold mb-1">Certificações</p>
           <p className="font-mono text-lg sm:text-xl font-bold text-warning">{stats.certifications}</p>
         </div>

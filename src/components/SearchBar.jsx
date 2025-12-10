@@ -103,7 +103,7 @@ const SearchBar = () => {
               className="font-mono text-xs px-2 sm:px-3 py-2 border-2 border-secondary bg-dark-600 text-light hover:bg-secondary hover:text-dark transition-colors text-left"
               disabled={loading || !configured}
             >
-              <span className="line-clamp-2">{q}</span>
+              {q}
             </button>
           ))}
         </div>

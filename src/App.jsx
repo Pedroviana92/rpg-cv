@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import CharacterPanel from './components/CharacterPanel';
 import Quest from './components/Quest';
 import SideQuest from './components/SideQuest';
@@ -8,6 +8,30 @@ import { characterInfo, mainQuests, sideQuests, skills, stats } from './data/cvD
 
 function App() {
   const [activeTab, setActiveTab] = useState('quests');
+  const contentSectionRef = useRef(null);
+
+  const handleStatClick = (statType) => {
+    // Mapear o tipo de stat para a aba correspondente
+    const tabMap = {
+      'totalXP': 'quests',
+      'mainQuests': 'quests',
+      'sideQuests': 'sideQuests',
+      'certifications': 'sideQuests'
+    };
+
+    const targetTab = tabMap[statType];
+    if (targetTab) {
+      setActiveTab(targetTab);
+
+      // Scroll suave para a seção de conteúdo após mudar a aba
+      setTimeout(() => {
+        contentSectionRef.current?.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }, 100);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-dark-900 p-3 sm:p-4 md:p-8">
@@ -34,6 +58,7 @@ function App() {
           characterClass={characterInfo.class}
           specialization={characterInfo.specialization}
           stats={stats}
+          onStatClick={handleStatClick}
         />
 
         {/* Search Bar */}
@@ -74,6 +99,7 @@ function App() {
         </div>
 
         {/* Content Sections */}
+        <div ref={contentSectionRef} className="scroll-mt-4">
         {activeTab === 'quests' && (
           <div>
             <h2 className="font-display text-2xl sm:text-3xl font-bold mb-4 text-light flex items-center gap-2">
@@ -173,6 +199,7 @@ function App() {
             </div>
           </div>
         )}
+        </div>
 
         {/* Footer */}
         <div className="mt-12 text-center border-3 border-primary bg-dark-800 text-light p-6 shadow-brutal-lg">

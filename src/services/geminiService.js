@@ -113,7 +113,7 @@ export const askAI = async (question) => {
 export const isAIConfigured = () => {
   const apiActive = import.meta.env.VITE_GEMINI_API_ACTIVE;
   // A chave agora é usada apenas no backend, mas mantemos a verificação para flags de feature
-  return apiActive === 'true';
+  return apiActive;
 };
 
 // Exportar com nomes genéricos para compatibilidade

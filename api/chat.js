@@ -106,7 +106,7 @@ export default async function handler(req, res) {
     // 4. Gerar resposta usando o modelo gemini-2.5-flash com Retry
     // Sintaxe correta para @google/genai v1+
     const response = await generateWithRetry(ai, {
-      model: "gemini-2.5-flash",
+      model: "gemini-2.5-pro",
       config: {
         systemInstruction: {
           parts: [{ text: context }]
